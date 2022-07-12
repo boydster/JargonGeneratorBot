@@ -1,9 +1,11 @@
-'use strict';
+// This module is built for use with the botster Discord chat bot.
 
-(function(angular) {
-    var types = {};
-
-    types['Technical'] = {
+module.exports = {
+  name: 'jargon',
+  description: "SteveTenant's Jargon Generator",
+  execute(msg, args) {
+    let types = {};
+    types['technical'] = {
         message: 'Need some dialogue for your Hollywood thriller screenplay? Press the button for some tech jargon!',
         wordPool: [
             [ // 0 - abbreviations
@@ -53,7 +55,7 @@
             "Send the {1} {2} into the {2}, it will {3} the {2} by {4} its {0} {2}!"
         ]
     };
-    types['Audio'] = {
+    types['audio'] = {
         message: 'Need to impress your hipster DJ friend? Press the button for some audio jargon!',
         wordPool: [
             [ // 0 - abbreviations
@@ -104,7 +106,7 @@
             "{4} has never been the same since I lost my {1} {1} {2}, now I have to use my {2} for {4}."
         ]
     };
-    types['Excuse'] = {
+    types['excuse'] = {
         message: 'Have a project due today that you completely forgot to do? Press the button for the perfect excuse!',
         wordPool: [
             [ // 0 - people/animals
@@ -152,7 +154,30 @@
             "The thing is, I can't {4} my {2} because my {0} {3} it, probably {1}.",
             "Remember when my {0} {3} my {2}? Well, today they {1} {3} it too, so I can't {4} it."
         ]
-    };
+    }
 
-    angular.module('jargon').value('jargonTypes', types);
-})(angular);
+    function getJargon(jargonType) {
+      if (jargonType != 'excuse' && jargonType != 'technical' && jargonType != 'audio' ) {return msg.channel.send("I'm supposed to be writing the nonsense here... Wanna try that again?");}
+      let jargonConstructs = Object.entries(types[jargonType]['constructs']);
+      let sentence = jargonConstructs[Math.floor(Math.random()*jargonConstructs.length)][1];
+      for (let i = 0; i < types[jargonType]['wordPool'].length; i++) {
+        let searchKey = '{' + i + '}';
+        let wordsUsed = [];
+        while (sentence.includes(searchKey)) {
+          let newWord = types[jargonType]['wordPool'][i][Math.floor(Math.random()*types[jargonType]['wordPool'][i].length)]
+          if (!sentence.includes(newWord)) {
+            sentence = sentence.replace(searchKey, newWord);
+          }
+        }
+      }
+      sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+      msg.channel.send(sentence);
+    }
+
+    if (args[0]) {
+      getJargon(args[0].toLowerCase());
+    } else {
+      msg.channel.send('Thanks for using the Jargon Generator, created by u/SteveTenants and ported to Discord by boydster.\nUsage: \n`.jargon audio` \n`.jargon technical` \n`.jargon excuse`')
+    }
+  }
+}
