@@ -165,7 +165,6 @@ module.exports = {
       let sentence = jargonConstructs[Math.floor(Math.random()*jargonConstructs.length)][1];
       for (let i = 0; i < types[jargonType]['wordPool'].length; i++) {
         let searchKey = '{' + i + '}';
-        let wordsUsed = [];
         while (sentence.includes(searchKey)) {
           let newWord = types[jargonType]['wordPool'][i][Math.floor(Math.random()*types[jargonType]['wordPool'][i].length)]
           if (!sentence.includes(newWord)) {
