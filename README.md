@@ -6,19 +6,12 @@ Created by u/SteveTenants and ported to Discord and IRC by boydster
 Build Tools
 -----------
 
-This project uses the following tools:
+This project will use the following tools:
 
 - Node Packaged Modules: https://www.npmjs.org/
 
-How to Build
+Installation
 ------------
 
-__Installing Node Modules__
-
-After downloading the source code from GitHub and configuring NPM and Grunt, you'll need to navigate to the root directory of the source tree, where package.json and Gruntfile.js are located.  From there, run the command ```npm install``` to pull in all the necessary node modules.  This will generate the node_modules folder.
-
-
-How to Publish
---------------
-
-This step has not yet been automated, so for now the only way to publish is to use an FTP client and upload the content manually.
+Currently, this module only works as an add-on to the botster Discord chat bot. As such, to install this, you must first install botster and then drop the jargon.js module into the discommands folder.
+https://github.com/geoffboyd/botster
