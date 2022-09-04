@@ -1,5 +1,3 @@
-// This module is built for use with the botster Discord chat bot.
-
 module.exports = {
   name: 'jargon',
   description: "SteveTenant's Jargon Generator",
@@ -12,33 +10,38 @@ module.exports = {
                 "TCP", "HTTP", "SDD", "RAM", "GB", "CSS", "SSL", "AGP", "SQL", "FTP", "PCI",
                 "AI", "ADP", "RSS", "XML", "EXE", "COM", "HDD", "THX", "SMTP", "SMS", "USB", "PNG",
                 "PHP", "UDP", "TPS", "RX", "ASCII", "CD-ROM", "CGI", "CPU", "DDR", "DHCP", "BIOS",
-                "IDE", "IP", "MAC", "MP3", "AAC", "PPPoE", "SSD", "SDRAM", "VGA", "XHTML", "Y2K", "GUI"
+                "IDE", "IP", "MAC", "MP3", "AAC", "PPPoE", "SSD", "SDRAM", "VGA", "XHTML", "Y2K", "GUI",
+                "RAID", "PCIe", "SATA", "DIMM", "GPU", "UHD", "AI", "ML", "APM", "API", "DBMS", "ERP",
+                "SaaS", "IaaS", "VDI", "IoT", "OLAP", "OLTP", "RTO", "RPO", "SSH", "SFTP", "VM", "HCI",
+                "SAN", "NAS", "VPN", "WAN", "SD-WAN", "MFA", "BYOD", "DDoS", "2FA"
             ],
             [ // 1 - adjectives
                 "auxiliary", "primary", "back-end", "digital", "open-source", "virtual",
                 "cross-platform", "redundant", "online", "haptic", "multi-byte", "bluetooth",
                 "wireless", "1080p", "neural", "optical", "solid state", "mobile", "unicode",
-                "backup", "high speed", "56k", "analog", "fiber optic", "central", "visual", "ethernet"
+                "backup", "high speed", "56k", "analog", "fiber optic", "central", "visual", "ethernet",
+                "hyperconverged", "4k", "backward compatible", "scalable"
             ],
             [ // 2 - nouns
                 "driver", "protocol", "bandwidth", "panel", "microchip", "program", "port", "card",
                 "array", "interface", "system", "sensor", "firewall", "hard drive", "pixel", "alarm",
                 "feed", "monitor", "application", "transmitter", "bus", "circuit", "capacitor", "matrix",
                 "address", "form factor", "array", "mainframe", "processor", "antenna", "transistor",
-                "virus", "malware", "spyware", "network", "internet"
+                "virus", "malware", "spyware", "network", "internet", "node", "cluster", "workload",
+                "cache", "cookie", "latency", "licensing", "botnet", "breach", "zero-day"
             ],
             [ // 3 - verbs
                 "back up", "bypass", "hack", "override", "compress", "copy", "navigate", "index",
                 "connect", "generate", "quantify", "calculate", "synthesize", "input", "transmit",
                 "program", "reboot", "parse", "shut down", "inject", "transcode", "encode",
-                "attach", "disconnect", "network"
+                "attach", "disconnect", "network", "defrag", "pentest", "phish",
             ],
             [ // 4 - verbs ending in "ing"
                 "backing up", "bypassing", "hacking", "overriding", "compressing", "copying",
                 "navigating", "indexing", "connecting", "generating", "quantifying", "calculating",
                 "synthesizing", "inputting", "transmitting", "programming", "rebooting", "parsing",
                 "shutting down", "injecting", "transcoding", "encoding", "attaching", "disconnecting",
-                "networking"
+                "networking", "pentesting", "phishing"
             ]
         ],
         constructs: [
@@ -162,7 +165,6 @@ module.exports = {
       let sentence = jargonConstructs[Math.floor(Math.random()*jargonConstructs.length)][1];
       for (let i = 0; i < types[jargonType]['wordPool'].length; i++) {
         let searchKey = '{' + i + '}';
-        let wordsUsed = [];
         while (sentence.includes(searchKey)) {
           let newWord = types[jargonType]['wordPool'][i][Math.floor(Math.random()*types[jargonType]['wordPool'][i].length)]
           if (!sentence.includes(newWord)) {
